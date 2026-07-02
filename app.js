@@ -6,7 +6,8 @@
   "use strict";
 
   // ── CONFIG ──
-  var API_URL = localStorage.getItem("sb_api_url") || "";
+  var DEFAULT_API = "https://script.google.com/macros/s/AKfycbyXD9t6BLx3fFQ2rbsR68_qTtwJd5_6ypOMQ2N1AIzL5JA2dj3mC905wyEp0Pbt-b26/exec";
+  var API_URL = localStorage.getItem("sb_api_url") || DEFAULT_API;
 
   // ── QUOTES ──
   var QUOTES = [
