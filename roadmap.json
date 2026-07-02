@@ -1,0 +1,136 @@
+{
+  "goal": "Python AI Backend Developer — ₹40K+ Net in 6 Months",
+  "start_date": "2026-07-01",
+  "target_date": "2026-12-31",
+  "phases": [
+    {
+      "id": "month1",
+      "title": "Month 1 — Python + DSA Foundation",
+      "subtitle": "July 2026",
+      "icon": "🐍",
+      "color": "#10B981",
+      "topics": [
+        {"id": "m1t1", "title": "Lists, Dicts, Sets, Tuples", "hours": 3, "resource": "Corey Schafer Python playlist"},
+        {"id": "m1t2", "title": "List Comprehensions & Generators", "hours": 2, "resource": "Corey Schafer"},
+        {"id": "m1t3", "title": "Functions: *args, **kwargs, Lambda", "hours": 2, "resource": "Corey Schafer"},
+        {"id": "m1t4", "title": "OOP: Classes, Inheritance, Dunder Methods", "hours": 4, "resource": "Corey Schafer"},
+        {"id": "m1t5", "title": "Decorators & Context Managers", "hours": 3, "resource": "Corey Schafer"},
+        {"id": "m1t6", "title": "File I/O & Exception Handling", "hours": 2, "resource": "Corey Schafer"},
+        {"id": "m1t7", "title": "Modules, Packages, Virtual Environments", "hours": 2, "resource": "Corey Schafer"},
+        {"id": "m1t8", "title": "Big O Notation", "hours": 3, "resource": "NeetCode Roadmap"},
+        {"id": "m1t9", "title": "Arrays & Hashing — Two Sum, Contains Duplicate", "hours": 4, "resource": "NeetCode"},
+        {"id": "m1t10", "title": "Two Pointers — Valid Palindrome, 3Sum", "hours": 4, "resource": "NeetCode"},
+        {"id": "m1t11", "title": "Sliding Window — Best Time Buy Stock, Longest Substring", "hours": 4, "resource": "NeetCode"},
+        {"id": "m1t12", "title": "Stack — Valid Parentheses, Min Stack", "hours": 3, "resource": "NeetCode"},
+        {"id": "m1t13", "title": "Linked List — Reverse LL, Merge Two Sorted", "hours": 4, "resource": "NeetCode"},
+        {"id": "m1t14", "title": "Review: Re-solve all problems from memory", "hours": 4, "resource": "LeetCode"}
+      ]
+    },
+    {
+      "id": "month2",
+      "title": "Month 2 — DSA Intermediate + FastAPI",
+      "subtitle": "August 2026",
+      "icon": "⚡",
+      "color": "#6366F1",
+      "topics": [
+        {"id": "m2t1", "title": "Binary Search — Binary Search, Search Rotated", "hours": 4, "resource": "NeetCode"},
+        {"id": "m2t2", "title": "Trees (DFS/BFS) + Recursion", "hours": 6, "resource": "NeetCode"},
+        {"id": "m2t3", "title": "Graphs (DFS/BFS) — Islands, Course Schedule", "hours": 6, "resource": "NeetCode"},
+        {"id": "m2t4", "title": "Backtracking — Subsets, Combination Sum", "hours": 4, "resource": "NeetCode"},
+        {"id": "m2t5", "title": "Dynamic Programming Basics — Climbing Stairs, House Robber, Coin Change", "hours": 8, "resource": "NeetCode"},
+        {"id": "m2t6", "title": "FastAPI Official Tutorial — Read + Code Along", "hours": 6, "resource": "fastapi.tiangolo.com"},
+        {"id": "m2t7", "title": "Build TaskFlow API: User Auth (JWT)", "hours": 5, "resource": "Build Project"},
+        {"id": "m2t8", "title": "Build TaskFlow API: CRUD + Pydantic Validation", "hours": 5, "resource": "Build Project"},
+        {"id": "m2t9", "title": "Build TaskFlow API: Pagination, Filtering, Sorting", "hours": 4, "resource": "Build Project"},
+        {"id": "m2t10", "title": "Build TaskFlow API: Tests with pytest", "hours": 4, "resource": "Build Project"},
+        {"id": "m2t11", "title": "Push TaskFlow to GitHub with clean README", "hours": 2, "resource": "GitHub"}
+      ]
+    },
+    {
+      "id": "month3",
+      "title": "Month 3 — Databases + System Design + Docker",
+      "subtitle": "September 2026",
+      "icon": "🗄️",
+      "color": "#F59E0B",
+      "topics": [
+        {"id": "m3t1", "title": "PostgreSQL: Indexing, EXPLAIN ANALYZE", "hours": 4, "resource": "PostgreSQL Docs"},
+        {"id": "m3t2", "title": "SQL Practice: JOINs, GROUP BY (10 LeetCode SQL)", "hours": 5, "resource": "LeetCode SQL"},
+        {"id": "m3t3", "title": "SQL Practice: Window Functions, Subqueries (10 more)", "hours": 5, "resource": "LeetCode SQL"},
+        {"id": "m3t4", "title": "SQLAlchemy 2.0 Async Tutorial", "hours": 4, "resource": "SQLAlchemy Docs"},
+        {"id": "m3t5", "title": "Alembic: Database Migrations", "hours": 3, "resource": "Alembic Docs"},
+        {"id": "m3t6", "title": "Docker: Dockerfile, docker-compose, Volumes", "hours": 4, "resource": "Docker Getting Started"},
+        {"id": "m3t7", "title": "Docker: Multi-stage Builds, Networks", "hours": 3, "resource": "Docker Docs"},
+        {"id": "m3t8", "title": "Dockerize TaskFlow: FastAPI + PostgreSQL + Redis + Nginx", "hours": 5, "resource": "Build Project"},
+        {"id": "m3t9", "title": "System Design: DNS, HTTP, Load Balancers", "hours": 3, "resource": "ByteByteGo YouTube"},
+        {"id": "m3t10", "title": "System Design: Caching (Redis), Message Queues", "hours": 3, "resource": "Gaurav Sen YouTube"},
+        {"id": "m3t11", "title": "System Design: CDN, API Gateway, Microservices", "hours": 3, "resource": "ByteByteGo YouTube"},
+        {"id": "m3t12", "title": "Design Exercise: URL Shortener (on paper)", "hours": 2, "resource": "Practice"},
+        {"id": "m3t13", "title": "Design Exercise: Image Search Engine (YOUR project)", "hours": 2, "resource": "Practice"},
+        {"id": "m3t14", "title": "Design Exercise: Notification System", "hours": 2, "resource": "Practice"}
+      ]
+    },
+    {
+      "id": "month4",
+      "title": "Month 4 — AI/ML Skills (Your Differentiator)",
+      "subtitle": "October 2026",
+      "icon": "🤖",
+      "color": "#EC4899",
+      "topics": [
+        {"id": "m4t1", "title": "LLM Fundamentals — Andrej Karpathy Intro", "hours": 3, "resource": "YouTube"},
+        {"id": "m4t2", "title": "LLM APIs: OpenAI, Gemini, Claude — API Calls", "hours": 4, "resource": "API Docs"},
+        {"id": "m4t3", "title": "Prompt Engineering: Zero-shot, Few-shot, CoT", "hours": 3, "resource": "DeepLearning.AI Course"},
+        {"id": "m4t4", "title": "Build: Simple Chatbot API (FastAPI + Gemini)", "hours": 4, "resource": "Build Project"},
+        {"id": "m4t5", "title": "RAG Fundamentals — What, Why, How", "hours": 3, "resource": "LangChain Docs"},
+        {"id": "m4t6", "title": "LangChain Course — DeepLearning.AI", "hours": 5, "resource": "DeepLearning.AI"},
+        {"id": "m4t7", "title": "Vector Embeddings & Chunking Strategies", "hours": 4, "resource": "LangChain Docs"},
+        {"id": "m4t8", "title": "Build DocSearch: PDF Upload + Chunking", "hours": 5, "resource": "Build Project"},
+        {"id": "m4t9", "title": "Build DocSearch: Qdrant Storage + Retrieval", "hours": 5, "resource": "Build Project"},
+        {"id": "m4t10", "title": "Build DocSearch: LLM Q&A + Source Citations", "hours": 5, "resource": "Build Project"},
+        {"id": "m4t11", "title": "Build DocSearch: Dockerize + Push to GitHub", "hours": 3, "resource": "Build Project"},
+        {"id": "m4t12", "title": "AI Agents Basics — LangGraph Tutorial", "hours": 4, "resource": "LangGraph Docs"},
+        {"id": "m4t13", "title": "Build: Simple Agent (Web Search + Answer)", "hours": 4, "resource": "Build Project"}
+      ]
+    },
+    {
+      "id": "month5",
+      "title": "Month 5 — Portfolio + Mock Interviews",
+      "subtitle": "November 2026",
+      "icon": "🎯",
+      "color": "#8B5CF6",
+      "topics": [
+        {"id": "m5t1", "title": "Polish Image Search: Clean README + Architecture Diagram", "hours": 3, "resource": "GitHub"},
+        {"id": "m5t2", "title": "Polish TaskFlow API: README + Screenshots", "hours": 3, "resource": "GitHub"},
+        {"id": "m5t3", "title": "Polish DocSearch RAG: README + Demo GIF", "hours": 3, "resource": "GitHub"},
+        {"id": "m5t4", "title": "GitHub Profile README", "hours": 2, "resource": "GitHub"},
+        {"id": "m5t5", "title": "Mock Interview 1 (Pramp)", "hours": 2, "resource": "pramp.com"},
+        {"id": "m5t6", "title": "Mock Interview 2 (Pramp)", "hours": 2, "resource": "pramp.com"},
+        {"id": "m5t7", "title": "Mock Interview 3 (Pramp)", "hours": 2, "resource": "pramp.com"},
+        {"id": "m5t8", "title": "Mock Interview 4 (Pramp)", "hours": 2, "resource": "pramp.com"},
+        {"id": "m5t9", "title": "Prepare 'Tell Me About Yourself' (2 min)", "hours": 2, "resource": "Practice"},
+        {"id": "m5t10", "title": "Project Deep-Dive Talk: Image Search (15 min)", "hours": 3, "resource": "Practice"},
+        {"id": "m5t11", "title": "Project Deep-Dive Talk: DocSearch RAG (15 min)", "hours": 3, "resource": "Practice"},
+        {"id": "m5t12", "title": "Resume: 1-page, finalized", "hours": 3, "resource": "Google Docs"},
+        {"id": "m5t13", "title": "LinkedIn: Headline + 2 Project Posts", "hours": 3, "resource": "LinkedIn"},
+        {"id": "m5t14", "title": "Connect with 100 Recruiters/Engineers", "hours": 4, "resource": "LinkedIn"}
+      ]
+    },
+    {
+      "id": "month6",
+      "title": "Month 6 — Job Hunt Sprint",
+      "subtitle": "December 2026",
+      "icon": "🚀",
+      "color": "#EF4444",
+      "topics": [
+        {"id": "m6t1", "title": "Set up profiles: Instahyre, Wellfound, Cutshort, Naukri", "hours": 3, "resource": "Job Platforms"},
+        {"id": "m6t2", "title": "Week 1: Apply 50 jobs (10/day)", "hours": 5, "resource": "LinkedIn + Platforms"},
+        {"id": "m6t3", "title": "Week 2: Apply 50 more + attend interviews", "hours": 5, "resource": "LinkedIn + Platforms"},
+        {"id": "m6t4", "title": "Week 3: Interview sprint + follow-ups", "hours": 5, "resource": "Interviews"},
+        {"id": "m6t5", "title": "Week 4: Final interviews + negotiate offers", "hours": 5, "resource": "Interviews"},
+        {"id": "m6t6", "title": "Daily: 2 LeetCode problems (stay sharp)", "hours": 1, "resource": "LeetCode"},
+        {"id": "m6t7", "title": "Weekend: System Design review sessions", "hours": 4, "resource": "Practice"},
+        {"id": "m6t8", "title": "Close offer ≥ ₹6 LPA", "hours": 0, "resource": "🎉"},
+        {"id": "m6t9", "title": "Resign and celebrate", "hours": 0, "resource": "🎉🎉🎉"}
+      ]
+    }
+  ]
+}
