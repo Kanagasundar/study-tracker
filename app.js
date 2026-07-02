@@ -435,7 +435,18 @@
         if (data.error) return showError(data.error);
         state.userCode = code;
         localStorage.setItem("sb_user_code", code);
-        tryLogin(code);
+        // Use the returned user data directly instead of a separate API call
+        if (data.user) {
+          state.user = data.user;
+          state.progress = {};
+          saveOffline();
+          showView("viewApp");
+          showPage("dashboard");
+          renderDashboard();
+        } else {
+          // Fallback for older backend that doesn't return user
+          tryLogin(code);
+        }
         toast("Account created! 🚀", "success");
       })
       .catch(function () { showLoading(false); showError("Registration failed."); });
