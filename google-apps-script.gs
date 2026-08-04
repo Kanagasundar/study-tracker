@@ -9,11 +9,17 @@
       - Execute as: Me
       - Who has access: Anyone
    5. Copy the Web App URL into app.js API_URL
-   6. In Apps Script, go to Triggers > Add Trigger:
-      - Function: sendDailyReminders
-      - Event source: Time-driven
-      - Type: Day timer
-      - Time: 9pm to 10pm
+   6. In Apps Script, go to Triggers (clock icon) > Add Trigger, up to THREE times:
+      Trigger 1: Function: sendDailyReminders  | Time-driven | Day timer | 9pm-10pm
+      Trigger 2: Function: sendGroupDigest     | Time-driven | Day timer | 9pm-10pm
+      Trigger 3: Function: sendWhatsAppReminders | Time-driven | Day timer | 9pm-10pm
+      (Trigger 3 is optional — only add it once you've filled in WhatsApp
+      columns for at least one person, see the WHATSAPP REMINDERS section below.)
+   Without these triggers actually being clicked into existence in the Apps
+   Script UI, nothing will ever fire — pushing this file to GitHub does NOT
+   deploy it or register triggers. You must open script.google.com, paste this
+   file's contents into the project, then redo step 4 (new deployment) and
+   step 6 (triggers) by hand after every edit.
    ═══════════════════════════════════════════════ */
 
 var SHEET_ID = SpreadsheetApp.getActiveSpreadsheet().getId();
@@ -117,7 +123,22 @@ function registerUser(data) {
     email           // K: email
   ]);
 
-  return { status: "ok", message: "Registered successfully" };
+  return {
+    status: "ok",
+    message: "Registered successfully",
+    user: {
+      code: code,
+      name: name,
+      email: email,
+      goal: goal,
+      start_date: today,
+      target_date: targetDate,
+      current_streak: 0,
+      longest_streak: 0,
+      last_active: "",
+      total_topics_done: 0
+    }
+  };
 }
 
 function getUser(code) {
@@ -357,6 +378,114 @@ function updateUserStats(code) {
   };
 }
 
+// ══════════ GROUP DIGEST (peer pressure) ══════════
+// Set sendGroupDigest and sendWhatsAppReminders as daily time-driven triggers
+// (9pm IST), separate from sendDailyReminders. They send EVERY enrolled user
+// the full group's status so slacking is visible to the whole group, not just
+// hidden in a private inbox.
+
+function getGroupStatusRows() {
+  var sheet = getSheet("Users");
+  var data = sheet.getDataRange().getValues();
+  var today = new Date().toISOString().slice(0, 10);
+
+  var rows = [];
+  for (var i = 1; i < data.length; i++) {
+    var name = data[i][1];
+    var streak = data[i][5] || 0;
+    var lastActive = data[i][7] ? formatDate(data[i][7]) : "";
+    var email = data[i][10];
+    var whatsappPhone = data[i][11] || "";  // L: whatsapp_phone (with country code, no +)
+    var whatsappApiKey = data[i][12] || ""; // M: whatsapp_apikey (from CallMeBot)
+    var studiedToday = lastActive === today;
+    rows.push({
+      name: name, streak: streak, studiedToday: studiedToday,
+      email: email, whatsappPhone: whatsappPhone, whatsappApiKey: whatsappApiKey
+    });
+  }
+
+  // Rank by streak desc, then by who studied today
+  rows.sort(function (a, b) {
+    if (b.streak !== a.streak) return b.streak - a.streak;
+    return (b.studiedToday ? 1 : 0) - (a.studiedToday ? 1 : 0);
+  });
+
+  return rows;
+}
+
+function sendGroupDigest() {
+  var rows = getGroupStatusRows();
+  if (rows.length === 0) return;
+
+  var lines = rows.map(function (r, idx) {
+    var mark = r.studiedToday ? "✅" : "🔴";
+    return (idx + 1) + ". " + mark + "  " + r.name + " — 🔥 " + r.streak + " day streak" +
+      (r.studiedToday ? " (studied today)" : " (NOT studied today)");
+  });
+
+  var missedCount = rows.filter(function (r) { return !r.studiedToday; }).length;
+  var subject = missedCount === 0
+    ? "✅ Study Buddy Group: everyone studied today!"
+    : "📊 Study Buddy Group: " + missedCount + "/" + rows.length + " missed today";
+
+  var table = lines.join("\n");
+
+  rows.forEach(function (r) {
+    if (!r.email) return;
+    var body = "Hey " + r.name + ",\n\n" +
+      "Tonight's group standings:\n\n" + table + "\n\n" +
+      (r.studiedToday
+        ? "You're on the board today. Keep the streak alive tomorrow.\n\n"
+        : "You didn't log anything today — and the rest of the group can see it.\n\n") +
+      "— Study Buddy 📚";
+    try {
+      MailApp.sendEmail({ to: r.email, subject: subject, body: body });
+    } catch (err) {
+      Logger.log("Failed to send digest to " + r.email + ": " + err.message);
+    }
+  });
+}
+
+// ══════════ WHATSAPP REMINDERS (via CallMeBot, free) ══════════
+// SETUP PER PERSON (one-time, each person does this themselves):
+//   1. Save the CallMeBot WhatsApp number as a contact (check the current
+//      number at https://www.callmebot.com/blog/free-api-whatsapp-messages/
+//      since the maintainer occasionally changes it).
+//   2. Send it the WhatsApp message: "I allow callmebot to send me messages"
+//   3. CallMeBot replies with an API key.
+//   4. Give the sheet owner: your WhatsApp number (digits only, country code,
+//      no +) and that API key, to fill into the Users sheet columns L and M.
+// Add "whatsapp_phone" and "whatsapp_apikey" as headers in columns L/M of the
+// Users tab (existing sheets need these added by hand — getSheet() only
+// writes headers when a tab is first created).
+// Rows with no phone/apikey are silently skipped, so partial group rollout is fine.
+
+function sendWhatsAppReminders() {
+  var rows = getGroupStatusRows();
+  if (rows.length === 0) return;
+
+  var compactLines = rows.map(function (r) {
+    var mark = r.studiedToday ? "✅" : "🔴";
+    return mark + " " + r.name + ": " + r.streak + "d";
+  });
+  var table = compactLines.join("\n");
+
+  rows.forEach(function (r) {
+    if (!r.whatsappPhone || !r.whatsappApiKey) return;
+    var text = "Study Buddy — tonight:\n" + table + "\n\n" +
+      (r.studiedToday ? "You're in. Keep it going tomorrow." : "You missed today — the group can see it.");
+    var url = "https://api.callmebot.com/whatsapp.php" +
+      "?phone=" + encodeURIComponent(r.whatsappPhone) +
+      "&text=" + encodeURIComponent(text) +
+      "&apikey=" + encodeURIComponent(r.whatsappApiKey);
+    try {
+      UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    } catch (err) {
+      Logger.log("Failed to send WhatsApp to " + r.whatsappPhone + ": " + err.message);
+    }
+  });
+}
+
 // ══════════ EMAIL NOTIFICATIONS ══════════
 // Set this as a daily time-driven trigger (9pm IST)
 
@@ -440,7 +569,7 @@ function findUserRow(code) {
   var sheet = getSheet("Users");
   var data = sheet.getRange("A:A").getValues();
   for (var i = 1; i < data.length; i++) {
-    if (data[i][0] === code) return i + 1; // 1-indexed row
+    if (String(data[i][0]).trim().toLowerCase() === code) return i + 1; // 1-indexed row
   }
   return -1;
 }
